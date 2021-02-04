@@ -2270,7 +2270,7 @@ Signature.parseDER = function(buf, strict) {
   }
 
   var header = buf[0];
-  $.checkArgument(header === 0x30, new Error('Header byte should be 0x30'));
+  $.checkArgument(header === 0x1E, new Error('Header byte should be 0x1E'));
 
   var length = buf[1];
   var buflength = buf.slice(2).length;
@@ -2355,7 +2355,7 @@ Signature.prototype.toBuffer = Signature.prototype.toDER = function() {
   var length = 2 + rlength + 2 + slength;
   var rheader = 0x02;
   var sheader = 0x02;
-  var header = 0x30;
+  var header = 0x1E;
 
   var der = Buffer.concat([new Buffer([header, length, rheader, rlength]), rbuf, new Buffer([sheader, slength]), sbuf]);
   return der;
@@ -2387,7 +2387,7 @@ Signature.isTxDER = function(buf) {
     // Non-canonical signature: too long
     return false;
   }
-  if (buf[0] !== 0x30) {
+  if (buf[0] !== 0x1E) {
     //  Non-canonical signature: wrong type
     return false;
   }
@@ -7398,7 +7398,7 @@ Script.prototype.isPublicKeyHashIn = function() {
     var pubkeyBuf = this.chunks[1].buf;
     if (signatureBuf &&
         signatureBuf.length &&
-        signatureBuf[0] === 0x30 &&
+        signatureBuf[0] === 0x1E &&
         pubkeyBuf &&
         pubkeyBuf.length
        ) {
@@ -7458,7 +7458,7 @@ Script.prototype.isPublicKeyIn = function() {
     var signatureBuf = this.chunks[0].buf;
     if (signatureBuf &&
         signatureBuf.length &&
-        signatureBuf[0] === 0x30) {
+        signatureBuf[0] === 0x1E) {
       return true;
     }
   }
@@ -22206,7 +22206,7 @@ function rmPadding(buf) {
 Signature.prototype._importDER = function _importDER(data, enc) {
   data = utils.toArray(data, enc);
   var p = new Position();
-  if (data[p.place++] !== 0x30) {
+  if (data[p.place++] !== 0x1E) {
     return false;
   }
   var len = getLength(data, p);
@@ -22277,7 +22277,7 @@ Signature.prototype.toDER = function toDER(enc) {
   arr.push(0x02);
   constructLength(arr, s.length);
   var backHalf = arr.concat(s);
-  var res = [ 0x30 ];
+  var res = [ 0x1E ];
   constructLength(res, backHalf.length);
   res = res.concat(backHalf);
   return utils.encode(res, enc);
@@ -27042,7 +27042,7 @@ function toDER (r, s) {
   }
 
   var total = r.length + s.length + 4
-  var res = [ 0x30, total, 0x02, r.length ]
+  var res = [ 0x1E, total, 0x02, r.length ]
   res = res.concat(r, [ 0x02, s.length ], s)
   return new Buffer(res)
 }
@@ -39504,7 +39504,7 @@ module.exports = Signature;
 
 Signature.prototype._importDER = function _importDER(data, enc) {
   data = utils.toArray(data, enc);
-  if (data.length < 6 || data[0] !== 0x30 || data[2] !== 0x02)
+  if (data.length < 6 || data[0] !== 0x1E || data[2] !== 0x02)
     return false;
   var total = data[1];
   if (1 + total > data.length)
@@ -39542,7 +39542,7 @@ Signature.prototype.toDER = function toDER(enc) {
     s = [ 0 ].concat(s);
 
   var total = r.length + s.length + 4;
-  var res = [ 0x30, total, 0x02, r.length ];
+  var res = [ 0x1E, total, 0x02, r.length ];
   res = res.concat(r, [ 0x02, s.length ], s);
   return utils.encode(res, enc);
 };
