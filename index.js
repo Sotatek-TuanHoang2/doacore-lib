@@ -1,70 +1,70 @@
 'use strict';
 
-var litecore = module.exports;
+var doacore = module.exports;
 
 // module information
-litecore.version = 'v' + require('./package.json').version;
-litecore.versionGuard = function(version) {
+doacore.version = 'v' + require('./package.json').version;
+doacore.versionGuard = function(version) {
   if (version !== undefined) {
-    var message = 'More than one instance of litecore-lib found. ' +
-      'Please make sure to require litecore-lib and check that submodules do' +
-      ' not also include their own litecore-lib dependency.';
+    var message = 'More than one instance of doacore-lib found. ' +
+      'Please make sure to require doacore-lib and check that submodules do' +
+      ' not also include their own doacore-lib dependency.';
     throw new Error(message);
   }
 };
-litecore.versionGuard(global._litecore);
-global._litecore = litecore.version;
+doacore.versionGuard(global._doacore);
+global._doacore = doacore.version;
 
 // crypto
-litecore.crypto = {};
-litecore.crypto.BN = require('./lib/crypto/bn');
-litecore.crypto.ECDSA = require('./lib/crypto/ecdsa');
-litecore.crypto.Hash = require('./lib/crypto/hash');
-litecore.crypto.Random = require('./lib/crypto/random');
-litecore.crypto.Point = require('./lib/crypto/point');
-litecore.crypto.Signature = require('./lib/crypto/signature');
+doacore.crypto = {};
+doacore.crypto.BN = require('./lib/crypto/bn');
+doacore.crypto.ECDSA = require('./lib/crypto/ecdsa');
+doacore.crypto.Hash = require('./lib/crypto/hash');
+doacore.crypto.Random = require('./lib/crypto/random');
+doacore.crypto.Point = require('./lib/crypto/point');
+doacore.crypto.Signature = require('./lib/crypto/signature');
 
 // encoding
-litecore.encoding = {};
-litecore.encoding.Base58 = require('./lib/encoding/base58');
-litecore.encoding.Base58Check = require('./lib/encoding/base58check');
-litecore.encoding.BufferReader = require('./lib/encoding/bufferreader');
-litecore.encoding.BufferWriter = require('./lib/encoding/bufferwriter');
-litecore.encoding.Varint = require('./lib/encoding/varint');
+doacore.encoding = {};
+doacore.encoding.Base58 = require('./lib/encoding/base58');
+doacore.encoding.Base58Check = require('./lib/encoding/base58check');
+doacore.encoding.BufferReader = require('./lib/encoding/bufferreader');
+doacore.encoding.BufferWriter = require('./lib/encoding/bufferwriter');
+doacore.encoding.Varint = require('./lib/encoding/varint');
 
 // utilities
-litecore.util = {};
-litecore.util.buffer = require('./lib/util/buffer');
-litecore.util.js = require('./lib/util/js');
-litecore.util.preconditions = require('./lib/util/preconditions');
+doacore.util = {};
+doacore.util.buffer = require('./lib/util/buffer');
+doacore.util.js = require('./lib/util/js');
+doacore.util.preconditions = require('./lib/util/preconditions');
 
 // errors thrown by the library
-litecore.errors = require('./lib/errors');
+doacore.errors = require('./lib/errors');
 
 // main bitcoin library
-litecore.Address = require('./lib/address');
-litecore.Block = require('./lib/block');
-litecore.MerkleBlock = require('./lib/block/merkleblock');
-litecore.BlockHeader = require('./lib/block/blockheader');
-litecore.HDPrivateKey = require('./lib/hdprivatekey.js');
-litecore.HDPublicKey = require('./lib/hdpublickey.js');
-litecore.Networks = require('./lib/networks');
-litecore.Opcode = require('./lib/opcode');
-litecore.PrivateKey = require('./lib/privatekey');
-litecore.PublicKey = require('./lib/publickey');
-litecore.Script = require('./lib/script');
-litecore.Transaction = require('./lib/transaction');
-litecore.URI = require('./lib/uri');
-litecore.Unit = require('./lib/unit');
+doacore.Address = require('./lib/address');
+doacore.Block = require('./lib/block');
+doacore.MerkleBlock = require('./lib/block/merkleblock');
+doacore.BlockHeader = require('./lib/block/blockheader');
+doacore.HDPrivateKey = require('./lib/hdprivatekey.js');
+doacore.HDPublicKey = require('./lib/hdpublickey.js');
+doacore.Networks = require('./lib/networks');
+doacore.Opcode = require('./lib/opcode');
+doacore.PrivateKey = require('./lib/privatekey');
+doacore.PublicKey = require('./lib/publickey');
+doacore.Script = require('./lib/script');
+doacore.Transaction = require('./lib/transaction');
+doacore.URI = require('./lib/uri');
+doacore.Unit = require('./lib/unit');
 
 // dependencies, subject to change
-litecore.deps = {};
-litecore.deps.bnjs = require('bn.js');
-litecore.deps.bs58 = require('bs58');
-litecore.deps.Buffer = Buffer;
-litecore.deps.elliptic = require('elliptic');
-litecore.deps.scryptsy = require('scryptsy');
-litecore.deps._ = require('lodash');
+doacore.deps = {};
+doacore.deps.bnjs = require('bn.js');
+doacore.deps.bs58 = require('bs58');
+doacore.deps.Buffer = Buffer;
+doacore.deps.elliptic = require('elliptic');
+doacore.deps.scryptsy = require('scryptsy');
+doacore.deps._ = require('lodash');
 
 // Internal usage, exposed for testing/advanced tweaking
-litecore.Transaction.sighash = require('./lib/transaction/sighash');
+doacore.Transaction.sighash = require('./lib/transaction/sighash');

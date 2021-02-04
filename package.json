@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/Sotatek-TuanHoang2/doacore-lib#readme",
   "name": "doacore-lib",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A pure and powerful JavaScript Doacoin library (Clone litecore lib 0.13.21).",
   "author": "Depp",
   "scripts": {
